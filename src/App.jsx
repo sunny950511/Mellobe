@@ -236,7 +236,7 @@ function App() {
           </a>
           <a href="#order" className="nav-item">
             <span className="dot dot-accent"></span>
-            <span className="nav-text">CART</span>
+            <span className="nav-text">ORDER</span>
           </a>
         </nav>
       </header>
