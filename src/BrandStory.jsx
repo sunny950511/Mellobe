@@ -117,11 +117,7 @@ function BrandStory() {
               </div>
 
               {/* 연결 도트 1 */}
-              <div className={`process-step-dots dots-1 ${activeStep >= 2 ? 'active' : ''}`}>
-                <span className="step-dot dot-1"></span>
-                <span className="step-dot dot-2"></span>
-                <span className="step-dot dot-3"></span>
-              </div>
+              <div className={`process-step-dot dot-1 ${activeStep >= 2 ? 'active' : ''}`}></div>
 
               {/* 2단계: 리사이클 원사 추출 */}
               <div className={`process-card step-2 ${activeStep >= 2 ? 'active' : ''}`}>
@@ -138,11 +134,7 @@ function BrandStory() {
               </div>
 
               {/* 연결 도트 2 */}
-              <div className={`process-step-dots dots-2 ${activeStep >= 3 ? 'active' : ''}`}>
-                <span className="step-dot dot-1"></span>
-                <span className="step-dot dot-2"></span>
-                <span className="step-dot dot-3"></span>
-              </div>
+              <div className={`process-step-dot dot-2 ${activeStep >= 3 ? 'active' : ''}`}></div>
 
               {/* 3단계: 체커보드 자수 갓 완성 */}
               <div className={`process-card step-3 ${activeStep >= 3 ? 'active' : ''}`}>
