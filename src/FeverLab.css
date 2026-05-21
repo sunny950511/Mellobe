@@ -307,27 +307,23 @@
 /* 패턴 및 디밍 칩 그룹 */
 .pattern-chips {
   display: flex;
-  justify-content: center;
-  /* 칩 버튼 가로 가운데 정렬 */
+  justify-content: space-between;
   gap: 10px;
   width: 100%;
   max-width: 330px;
 }
 
 .chip-btn {
-  flex: none;
-  /* flex: 1 해제하여 패딩에 따라 가로폭이 반응하도록 수정 */
+  flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* 콘텐츠 중앙 정렬 */
   gap: 5px;
   background-color: var(--pure-white);
   border: 3px solid var(--primary-forest);
   padding: 6px 10px;
   border-radius: 9999px;
   font-size: 0.8rem;
-  /* 0.88rem -> 0.8rem 추가 축소 */
   font-weight: 800;
   cursor: pointer;
   transition: var(--transition-jelly);
@@ -574,9 +570,9 @@
 
   /* 패턴 칩 모바일 최적화 (가운데 정렬 및 좁은 화면 줄바꿈 유연화) */
   .pattern-chips {
-    justify-content: center;
+    justify-content: space-between;
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding-bottom: 4px;
   }
 
@@ -589,13 +585,10 @@
   }
 
   .chip-btn {
-    flex: none;
-    /* 모바일에서도 flex 해제 */
+    flex: 1;
     justify-content: center;
     padding: 5px 8px;
-    /* 모바일 패딩이 정상 적용되도록 변경 */
     font-size: 0.72rem;
-    /* 0.78rem -> 0.72rem 축소 */
     border-width: 2px;
     box-shadow: 2px 2px 0px 0px var(--primary-forest);
   }
