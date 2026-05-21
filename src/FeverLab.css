@@ -541,7 +541,7 @@
 
   /* 컨트롤 타이틀 및 캡션 컴팩트화 */
   .detail-title {
-    font-size: 1.35rem;
+    font-size: 1.22rem; /* 줄바꿈 방지를 위해 크기 축소 (2줄 정렬) */
     font-weight: 900;
     text-align: center;
     margin-bottom: 4px;
@@ -630,5 +630,9 @@
     transform: scale(0.72);
     /* 초소형 기기에서도 0.72로 여백 없이 꽉 채우도록 확대 */
     transform-origin: center center;
+  }
+  
+  .detail-title {
+    font-size: 1.12rem; /* 극모바일 타이틀 축소 (2줄 정렬) */
   }
 }

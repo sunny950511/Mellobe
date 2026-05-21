@@ -317,8 +317,18 @@
   .value-card {
     padding: 36px 28px;
   }
+  .value-card h3 {
+    font-size: 1.25rem; /* 모바일 가치 카드 h3 크기 축소 */
+  }
   .value-title {
     font-size: 1.8rem;
+  }
+  .value-hashtags {
+    gap: 10px; /* 모바일 해시태그 간격 조절 */
+  }
+  .value-hashtags span {
+    font-size: 1.0rem; /* 모바일 해시태그 크기 축소 */
+    font-weight: 700;  /* 모바일 해시태그 두께 축소 */
   }
   .story-divider {
     margin: 50px 0;
@@ -329,6 +339,9 @@
   }
   .story-text-zone {
     text-align: center;
+  }
+  .story-headline {
+    font-size: 1.65rem; /* 모바일 스토리 헤드라인 크기 축소 (2줄 정렬) */
   }
   .process-flow {
     flex-direction: column;
@@ -350,5 +363,21 @@
   .arrow-line {
     width: 16px;
     flex-grow: 0;
+  }
+}
+
+/* 극모바일 해상도(480px 이하) 추가 최적화 */
+@media (max-width: 480px) {
+  .value-card h3 {
+    font-size: 1.15rem; /* 극모바일 h3 최적화 */
+  }
+  .value-hashtags {
+    gap: 6px;
+  }
+  .value-hashtags span {
+    font-size: 0.88rem; /* 극모바일 해시태그 한 줄 정렬 */
+  }
+  .story-headline {
+    font-size: 1.45rem; /* 극모바일 스토리 헤드라인 2줄 정렬 */
   }
 }
