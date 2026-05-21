@@ -1,0 +1,1701 @@
+/* html 스무스 스크롤 기본값 적용 */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 56px;
+  /* 얇아진 헤더 높이만큼 스크롤 위치를 타이트하게 제어 */
+}
+
+/* Global Container & Dark / Light Theme */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition:
+    background-color 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),
+    color 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding-bottom: 0;
+}
+
+.theme-light {
+  background-color: var(--bg-butter);
+  color: var(--primary-forest);
+}
+
+.theme-dark {
+  background-color: var(--primary-forest);
+  color: var(--bg-butter);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* HEADER */
+.brand-header {
+  height: 56px;
+  /* 80px에서 56px로 슬림화하여 화면 개방감 선사 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background-color: var(--pure-white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--primary-forest);
+  /* 얇은 초록색 경계선으로 키치 마감 */
+  transition: border-color 0.6s ease, height 0.3s ease;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s var(--ease-jelly);
+  cursor: pointer;
+}
+
+.logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  transition: filter 0.3s ease, transform 0.4s var(--ease-jelly);
+}
+
+.header-logo:hover {
+  transform: scale(1.08) rotate(-3deg);
+  /* 더 쫀득하고 통통 튀는 반동 회전 */
+}
+
+.header-logo:hover .logo-img {
+  /* 따뜻한 노란색과 팝한 코랄 주황빛 광원이 겹쳐 갓 내부 전구 불빛이 확 피어오르는 광원 묘사 */
+  filter: drop-shadow(0 0 10px rgba(255, 225, 60, 0.95)) drop-shadow(0 0 22px var(--accent-coral));
+}
+
+/* HEADER NAVIGATION */
+.header-nav {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+  max-width: 480px;
+  margin: 0 40px;
+  align-items: center;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--primary-forest);
+  padding: 10px 14px;
+  /* 마우스 정확도를 위해 터치/클릭 터치 영역 넓게 확장 */
+  border-radius: 12px;
+  transition: transform 0.2s var(--ease-jelly), color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-text {
+  letter-spacing: 0.5px;
+}
+
+/* 다크 테마 전환 시 네비게이션 색상 보정 */
+.theme-dark .nav-item {
+  color: var(--bg-butter);
+}
+
+/* 클릭 움직임 인터렉션 강도 조절 ( scale(1.04) 정도로 살짝만 반응하여 덜 피로하게 ) */
+.nav-item:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.nav-item:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: dotBounce 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: border-color 0.6s ease;
+}
+
+/* 다크 테마일 때 테두리 색상 보정 */
+.theme-dark .dot {
+  border-color: var(--bg-butter);
+}
+
+.dot-primary {
+  background-color: var(--primary-forest);
+}
+
+.dot-accent {
+  background-color: var(--accent-coral);
+}
+
+.dot-butter {
+  background-color: var(--bg-butter);
+}
+
+/* 탱탱볼 순차 딜레이 */
+.nav-item:nth-child(1) .dot {
+  animation-delay: 0s;
+}
+
+.nav-item:nth-child(2) .dot {
+  animation-delay: 0.25s;
+}
+
+.nav-item:nth-child(3) .dot {
+  animation-delay: 0.5s;
+}
+
+.nav-item:nth-child(4) .dot {
+  animation-delay: 0.75s;
+}
+
+@keyframes dotBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+
+  30% {
+    transform: translateY(-12px) scale(0.85, 1.25);
+  }
+
+  50% {
+    transform: translateY(0) scale(1.2, 0.8);
+  }
+
+  70% {
+    transform: translateY(-4px) scale(0.95, 1.05);
+  }
+
+  85% {
+    transform: translateY(0) scale(1.05, 0.95);
+  }
+}
+
+.header-cta {
+  background-color: var(--accent-coral);
+  color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px 0px var(--primary-forest);
+  transition:
+    transform 0.2s var(--ease-jelly),
+    box-shadow 0.2s var(--ease-jelly);
+  white-space: nowrap;
+}
+
+.header-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0px 0px var(--primary-forest);
+}
+
+.header-cta:active {
+  transform: translateY(1px);
+  box-shadow: 2px 2px 0px 0px var(--primary-forest);
+}
+
+/* JELLY BUTTON COMMON */
+.btn-jelly {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--accent-coral);
+  color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  border-radius: 16px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 5px 5px 0px 0px var(--primary-forest);
+  transition: var(--transition-jelly);
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* SECTION 1: HERO - 100vh 비대칭 인터록킹 그리드 (Interlocking Grid) */
+.section-hero-kitsch {
+  height: calc(100vh - 56px);
+  min-height: 600px;
+  background-color: var(--bg-butter);
+  /* 글로벌 버터옐로우 토큰 적용 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 히어로 전체 흐릿한 배경 롤링 트랙 */
+.hero-blur-bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-blur-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: blur(35px) brightness(1.02);
+  /* 강력한 블러 효과로 몽환적인 연출 */
+  transition: opacity 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-blur-bg-img.active {
+  opacity: 0.16;
+  /* 은은하게 파스텔 색조 번짐만 유도해 맑은 노란색 유지 */
+  transform: scale(1.0);
+}
+
+/* 그리드 판: 4열 3행 */
+.hero-interlocking-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 0.6fr 1.1fr;
+  grid-template-rows: 1.25fr 0.75fr 1fr;
+  /* 셀1(1.25fr)을 대폭 키우고, 중간 셀(0.75fr)을 슬림화 */
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 1;
+  /* 컨페티(z-index: 2)가 노란색 셀 위로 보일 수 있도록 z-index: 1로 복귀 */
+}
+
+/* 얇은 1px solid #0B4628 구획 선 및 맞물림 처리 */
+.grid-cell {
+  position: relative;
+  border: 1px solid #0B4628;
+  margin: -0.5px;
+  /* 테두리가 겹치지 않고 정교하게 1px로 물리게 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+  /* 91% 불투명도로 상향해 뒤편 어두운 실루엣의 탁한 투과를 없애고 맑은 버터옐로우 복구 */
+  background-color: rgba(var(--bg-butter-rgb), 0.91);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.4s var(--ease-jelly);
+}
+
+/* 격자 셀 내부의 모든 실질 콘텐츠(텍스트, 버튼, 뱃지 등)를 컨페티(z-index: 2) 위로 배치 */
+.grid-cell>* {
+  position: relative;
+  z-index: 3;
+}
+
+/* 셀 1: 거대한 메인 카피 타이포그래피 (첫번째 줄) */
+.cell-title-brand {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  justify-content: center;
+  padding: 40px 40px 24px 50px;
+  /* 높이가 커짐에 맞춰 여백을 보다 넉넉히 확장 */
+}
+
+.cell-title-brand .grid-badge {
+  align-self: flex-start;
+  background-color: var(--primary-forest);
+  color: var(--bg-butter);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  /* 여백 줄임 */
+  display: inline-block;
+  border: 2px solid var(--primary-forest);
+  box-shadow: 2px 2px 0px rgba(11, 70, 40, 0.2);
+}
+
+.cell-title-brand .grid-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 9.5vw, 8rem);
+  /* 태블릿 등 좁은 가로 폭에서 텍스트 줄바꿈 방지 */
+  font-weight: 900;
+  color: var(--accent-coral);
+  line-height: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 4px 4px 0px #0B4628;
+}
+
+/* 셀 2: 조명 이미지 로테이션 슬라이더 (우측 전체 세로 영역) */
+.cell-image-slider {
+  grid-column: 4;
+  grid-row: 1 / span 3;
+  /* 3개 행 전체 커버 */
+  padding: 0;
+  /* 슬라이더 이미지가 테두리에 꽉 밀착되도록 여백 제거 */
+  background-color: #fffdf5;
+  /* 조명이 얹어진 깔끔하고 산뜻한 배경 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  position: relative;
+  z-index: 3;
+  /* 컨페티(z-index: 2)보다 높은 레이어로 배치하여 컨페티가 이미지 영역을 가리며 침범하는 것 방지 */
+}
+
+.grid-slider-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-slide-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  /* 이미지가 셀 전면에 꽉 차게 변경 */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fffdf5;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.grid-slide-img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.grid-slide-img.hero5-special,
+.hero-blur-bg-img.hero5-special {
+  background-position: 22% center;
+  /* 좌측에 배치된 스탠드를 화면 중앙으로 이동 */
+}
+
+/* 셀 3: 상세 서술 한글 카피 (세번째 줄 전체) */
+.cell-description {
+  grid-column: 1 / span 3;
+  grid-row: 3;
+  padding: 24px 50px;
+  justify-content: center;
+}
+
+.cell-description .grid-sub-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.5;
+  color: #0B4628;
+  word-break: keep-all;
+  margin: 0;
+}
+
+/* 셀 4: 입체적 젤리 CTA 입양 버튼 (두번째 줄 좌측) */
+.cell-cta-button {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  background-color: var(--accent-coral);
+  /* 핵심 오렌지색 기용 */
+  padding: 24px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color 0.4s var(--ease-jelly), transform 0.2s ease;
+}
+
+.cell-cta-button:hover {
+  background-color: #0B4628;
+  /* 어두운 포레스트 그린으로 다크반전 */
+}
+
+.cell-cta-button:active {
+  background-color: #08331d;
+}
+
+.grid-btn-cta {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  color: var(--pure-white);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  pointer-events: none;
+  /* 부모인 cell-cta-button에서 이벤트를 일괄 흡수 */
+}
+
+.btn-arrow {
+  transition: transform 0.4s var(--ease-jelly);
+}
+
+.cell-cta-button:hover .btn-arrow {
+  transform: translateX(8px);
+}
+
+/* 셀 5: 100% ECO 마크 (두번째 줄 우측) */
+.cell-deco-badge {
+  grid-column: 3;
+  grid-row: 2;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.grid-eco-sticker {
+  background-color: var(--primary-forest);
+  color: var(--bg-butter);
+  padding: 14px 20px;
+  /* 단독 회전을 위해 패딩 보정 */
+  border-radius: 50%;
+  /* 회전 시 제자리 회전이 이쁜 원형 뱃지화 */
+  font-size: 0.8rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--primary-forest);
+  box-shadow: 2px 2px 0px rgba(11, 70, 40, 0.15);
+  animation: badgeRotate 8s linear infinite;
+  transform-origin: center;
+  white-space: nowrap;
+}
+
+@keyframes badgeRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 통통 튀는 젤리 마퀴 밴드 */
+.hero-marquee-band {
+  width: 100%;
+  height: 54px;
+  background-color: var(--accent-coral);
+  /* 강조 코랄 탠저린 적용 */
+  border-top: 2px solid var(--primary-forest);
+  /* 격자 경계선과 자연스럽게 물리는 마감 */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;
+  /* 뒷배경 블러 필터 및 컨페티 등 하위 레이어의 간섭/오염을 철저하게 방지 */
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeContinuous 20s linear infinite;
+  align-items: center;
+}
+
+.marquee-content {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 60px;
+  padding-right: 60px;
+}
+
+.marquee-content span {
+  display: inline-block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--pure-white);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  animation: jellyTextBounce 2s infinite ease-in-out;
+}
+
+.marquee-content span:nth-child(even) {
+  animation-delay: 1s;
+  color: var(--bg-butter);
+}
+
+@keyframes marqueeContinuous {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes jellyTextBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.08, 0.92);
+  }
+}
+
+.hero-lamp-img {
+  position: absolute;
+  /* 여러 슬라이드가 겹치도록 절대 배치 */
+  width: auto;
+  height: 100%;
+  max-height: min(440px, 45vh);
+  /* 뷰포트 세로 비례 최대치 제한으로 한 화면 이탈 방지 */
+  aspect-ratio: 3 / 4;
+  /* 세로형 감성 엽서 비율로 규격 고정 */
+  object-fit: cover;
+  /* 프레임 내부를 꽉 채우도록 설정 */
+  border-radius: 40px;
+  /* 동글동글하고 말랑한 젤리 모서리 */
+  border: 4px solid var(--primary-forest);
+  /* 키치한 외곽 프레임 선 */
+  box-shadow: 16px 16px 0px var(--primary-forest);
+  /* 입체 뉴트로 하드 섀도우 */
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.92) rotate(1deg);
+  transition:
+    opacity 0.8s ease-in-out,
+    transform 0.8s var(--ease-jelly),
+    box-shadow 0.4s var(--ease-jelly),
+    border-color 0.4s ease;
+  pointer-events: none;
+  background-color: var(--pure-white);
+}
+
+.hero-lamp-img.active {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  pointer-events: auto;
+}
+
+/* 호버 시 쫀득하게 비틀어지며 섀도우가 확장되는 젤리 모션 */
+.hero-lamp-img.active:hover {
+  transform: scale(1.04) rotate(-1.5deg);
+  box-shadow: 22px 22px 0px var(--accent-coral);
+  border-color: var(--accent-coral);
+  cursor: pointer;
+}
+
+.bounce-in {
+  /* 첫 이미지 등장용 애니메이션 (active 트랜지션과 혼선이 생기지 않도록 첫 로드에만 적용) */
+  animation: heroBounce 1.2s var(--ease-jelly) forwards;
+}
+
+@keyframes heroBounce {
+  0% {
+    transform: scale(0) rotate(-15deg);
+  }
+
+  70% {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+
+
+/* SECTION 4: OOTD GALLERY */
+.section-gallery {
+  padding: 120px 0;
+  transition: background-color 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-bottom: 3px solid var(--primary-forest);
+}
+
+.gallery-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.gallery-badge {
+  background-color: var(--accent-coral);
+  color: var(--pure-white);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.gallery-title {
+  font-size: 2.6rem;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.gallery-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* OOTD 갤러리 사각형 사진 카드 - 삐뚤빼뚤 둥실 둥둥 뜨는 플로팅 역동적 인터랙션 */
+.gallery-card {
+  background-color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 6px 6px 0px 0px var(--primary-forest);
+  transition: transform 0.4s var(--ease-jelly), box-shadow 0.4s var(--ease-jelly);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 개별 카드별로 삐뚤빼뚤한 뉴트로 회전 각도 및 다른 주기의 둥실둥실 플로팅 애니메이션 부여 */
+.gallery-card.grid-item-1,
+.gallery-card:nth-child(3n+1) {
+  transform: rotate(-1.5deg);
+  animation: kitschFloat1 4.5s ease-in-out infinite;
+}
+
+.gallery-card.grid-item-2,
+.gallery-card:nth-child(3n+2) {
+  transform: rotate(2deg);
+  animation: kitschFloat2 5s ease-in-out infinite;
+}
+
+.gallery-card.grid-item-3,
+.gallery-card:nth-child(3n+3) {
+  transform: rotate(-2.2deg);
+  animation: kitschFloat3 4.2s ease-in-out infinite;
+}
+
+/* 마우스 호버 시: 애니메이션을 일시 정지하고, 뿅 튕겨 솟으며 올바른 각도로 정렬 & 그림자 팝핑 */
+.gallery-card:hover {
+  animation-play-state: paused;
+  transform: scale(1.04) translateY(-14px) rotate(0deg) !important;
+  box-shadow: 14px 14px 0px 0px var(--primary-forest);
+  z-index: 10;
+}
+
+.gallery-img-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  /* 1:1 Aspect Ratio */
+  overflow: hidden;
+  border-bottom: 3px solid var(--primary-forest);
+}
+
+.gallery-img-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 호버 시 이미지 줌인 및 살짝 사선 회전 효과 추가 */
+.gallery-card:hover .gallery-img-wrap img {
+  transform: scale(1.08) rotate(1deg);
+}
+
+/* 찜하기(하트) 버튼 */
+.heart-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background-color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px 0px var(--primary-forest);
+  transition: var(--transition-jelly);
+  z-index: 5;
+}
+
+.heart-btn:hover {
+  transform: scale(1.15) rotate(15deg);
+  box-shadow: 4px 4px 0px 0px var(--primary-forest);
+}
+
+/* 둥실둥실 흔들리는 젤리 플로팅 키프레임 */
+@keyframes kitschFloat1 {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(-0.5deg);
+  }
+}
+
+@keyframes kitschFloat2 {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(2deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+@keyframes kitschFloat3 {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2.2deg);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(-1.2deg);
+  }
+}
+
+.heart-icon {
+  color: var(--primary-forest);
+  transition:
+    transform 0.2s ease,
+    fill 0.2s ease;
+}
+
+.heart-btn.liked {
+  background-color: var(--pure-white);
+  animation: heartPop 0.4s var(--ease-jelly) forwards;
+}
+
+.heart-btn.liked .heart-icon {
+  color: var(--accent-coral);
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heart-btn:active {
+  transform: scale(0.9);
+}
+
+.gallery-card-info {
+  padding: 20px 24px;
+  text-align: left;
+  background-color: var(--pure-white);
+}
+
+.gallery-card-info h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--primary-forest);
+}
+
+.gallery-card-info p {
+  font-size: 0.95rem;
+  color: var(--accent-coral);
+  font-weight: 700;
+}
+
+/* 다크 테마 전환 시 갤러리 카드 보정 */
+.theme-dark .gallery-card-info h4 {
+  color: var(--primary-forest);
+}
+
+/* SECTION 5: EPIC CTA */
+.section-epic-cta {
+  padding: 100px 0;
+  border-bottom: 3px solid var(--primary-forest);
+}
+
+.epic-box {
+  background-color: var(--pure-white);
+  border: 4px solid var(--primary-forest);
+  border-radius: 32px;
+  padding: 80px 40px;
+  text-align: center;
+  box-shadow: 10px 10px 0px 0px var(--primary-forest);
+  position: relative;
+  overflow: hidden;
+}
+
+.epic-box::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle,
+      rgba(255, 242, 172, 0.3) 0%,
+      transparent 60%);
+  pointer-events: none;
+}
+
+.epic-small-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  color: var(--accent-coral);
+  font-weight: 800;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.epic-main-title {
+  font-size: 3rem;
+  line-height: 1.25;
+  margin-bottom: 40px;
+}
+
+.btn-epic-action {
+  padding: 20px 44px;
+  font-size: 1.35rem;
+  border-radius: 20px;
+}
+
+/* 주기적인 화살표 튕김 */
+.bounce-arrow {
+  animation: arrowBounce 1.2s infinite ease-in-out;
+}
+
+@keyframes arrowBounce {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+/* FOOTER */
+.brand-footer {
+  background-color: var(--pure-white);
+  padding: 60px 40px;
+  border-top: 3px solid var(--primary-forest);
+  text-align: left;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--primary-forest);
+  font-weight: 800;
+}
+
+.footer-top p {
+  max-width: 400px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.footer-bottom {
+  border-top: 2px dashed rgba(11, 70, 40, 0.15);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* MOBILE STICKY BOTTOM BAR */
+.mobile-sticky-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--pure-white);
+  border-top: 3px solid var(--primary-forest);
+  padding: 16px 24px;
+  z-index: 99;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.sticky-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.sticky-price-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.price-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-forest);
+}
+
+.mobile-sticky-cta {
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0px 0px var(--primary-forest);
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1024px) {
+  .header-logo {
+    font-size: 1.5rem;
+  }
+
+  .header-nav {
+    margin: 0 15px;
+    max-width: 400px;
+  }
+
+  .nav-item {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .hero-title {
+    font-size: 3.8rem;
+    /* 태블릿 겹침 회피를 위해 약간 슬림화 */
+    line-height: 1.05;
+    letter-spacing: -0.8px;
+  }
+
+  .hero-lamp-img {
+    max-height: min(380px, 40vh);
+    /* 이미지 크기 보정 */
+  }
+
+  .hero-content {
+    gap: 40px;
+  }
+
+  /* 태블릿 해상도 이하일 때 도트 개수 4개로 제한 */
+  .dot-d5,
+  .dot-d6,
+  .dot-d7,
+  .dot-d8 {
+    display: none;
+  }
+
+  /* 태블릿에서 찌그러지지 않도록 1열 배치 전환 */
+  .value-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+
+  /* 갤러리를 3열에서 2열로 변경하여 카드 찌그러짐 차단 */
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* 모바일 초슬림 1열 헤더 및 앵커 이동 패딩 최적화 */
+  html {
+    scroll-padding-top: 50px;
+    /* 초슬림 헤더 높이에 맞춤 */
+  }
+
+  .brand-header {
+    height: 50px;
+    /* 모바일 헤더도 50px로 극단적인 얇음 실현 */
+    padding: 0 16px;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0;
+    border-bottom: 2px solid var(--primary-forest);
+  }
+
+  .header-logo {
+    order: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 38px;
+    /* 모바일에서는 로고 크기를 살짝 콤팩트하게 38px로 */
+  }
+
+  .header-logo:active .logo-img {
+    /* 모바일 터치 시 노란색/코랄 네온 글로우로 탭 피드백 구현 */
+    filter: drop-shadow(0 0 8px rgba(255, 225, 60, 0.95)) drop-shadow(0 0 18px var(--accent-coral));
+  }
+
+  .header-nav {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    justify-content: flex-end;
+    gap: 6px;
+    order: 2;
+    flex-wrap: nowrap;
+  }
+
+  /* 모바일 키치 칩 스타일 메뉴바 개편 */
+  .nav-item {
+    background-color: var(--bg-butter);
+    border: 2px solid var(--primary-forest);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.76rem;
+    font-weight: 900;
+    box-shadow: 2px 2px 0px 0px var(--primary-forest);
+    color: var(--primary-forest);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  /* 다크 존 테마일 때도 선명하도록 모바일 칩 보정 */
+  .theme-dark .nav-item {
+    background-color: var(--pure-white);
+    color: var(--primary-forest);
+    border-color: var(--primary-forest);
+  }
+
+  /* 터치 영역이 넓고 흔들림 피로도가 낮은 모바일 클릭 모션 */
+  .nav-item:hover {
+    transform: none;
+    /* 모바일 호버 점핑 모션은 제거하여 눈 피로도 감소 */
+  }
+
+  .nav-item:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px 0px var(--primary-forest);
+  }
+
+  .nav-item .dot {
+    width: 6px;
+    height: 6px;
+    animation: none;
+    /* 모바일 칩 안의 도트는 얌전하게 고정하여 복잡함을 배제 */
+  }
+
+  .section-hero {
+    height: auto;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .section-hero-kitsch {
+    height: auto;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .hero-interlocking-grid {
+    grid-template-columns: 0.65fr 0.35fr;
+    /* 좌우 2열 배치로 CTA/배지 수평 병렬 정렬 */
+    grid-template-rows: auto auto auto 400px;
+    /* 4행 흐름으로 이미지 슬라이더를 맨 아래 배치 (400px 정방형 비율로 키워 위아래 잘림 극복) */
+    height: auto;
+    /* 데스크톱의 height: 100%를 무력화하여 세로로 납작하게 찌그러짐을 완벽 방지 */
+  }
+
+  .grid-cell {
+    padding: 20px 16px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cell-title-brand {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    padding: 32px 20px 20px;
+  }
+
+  .cell-title-brand .grid-badge {
+    margin-bottom: 10px;
+  }
+
+  .cell-title-brand .grid-main-title {
+    font-size: 3.6rem;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0px #0B4628;
+  }
+
+  .cell-cta-button {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 16px 12px;
+  }
+
+  .grid-btn-cta {
+    font-size: 1.05rem;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .cell-deco-badge {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grid-eco-sticker {
+    width: 68px;
+    height: 68px;
+    padding: 0;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    border-radius: 50%;
+    margin-bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .cell-description {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    padding: 20px 24px;
+  }
+
+  .cell-description .grid-sub-desc {
+    font-size: 1.0rem;
+    line-height: 1.45;
+  }
+
+  .cell-image-slider {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+    height: 100%;
+    padding: 0;
+    /* 모바일에서도 테두리 끝까지 꽉 들어차도록 변경 */
+    background-color: var(--bg-butter);
+    /* 노란색 배경으로 통일하여 흰색 옆구리 공백 노출을 방지 */
+    position: relative;
+    z-index: 3;
+    /* 모바일에서도 컨페티(z-index: 2)가 이미지 영역 위로 침범하지 않고 얌전하게 뒤로 숨게 보정 */
+  }
+
+  .grid-slide-img {
+    background-size: cover;
+    /* 다시 셀 전체에 빈틈없이 꽉 차도록 cover 복구하여 흰색 박스 상자 원천 방지 */
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* 높이 400px 확장으로 인해 갓과 밑바닥이 잘리지 않고 조화롭게 중앙 매칭 */
+    background-color: var(--bg-butter);
+    /* 맑은 노란색으로 배경 통일 */
+  }
+
+  .grid-slide-img.hero5-special {
+    background-position: 22% center;
+    /* hero5 이미지도 세로 정렬은 중앙으로 복귀하여 갓과 하단부 살림 */
+  }
+
+  .value-header {
+    margin-bottom: 40px;
+  }
+
+  .value-title {
+    font-size: 1.8rem;
+  }
+
+  .value-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .value-card {
+    padding: 32px 24px;
+  }
+
+
+  .gallery-title {
+    font-size: 1.8rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .epic-main-title {
+    font-size: 1.8rem;
+  }
+
+  .epic-box {
+    padding: 50px 20px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
+
+  /* Show Sticky Bottom Bar on Mobile */
+  .mobile-sticky-bar {
+    display: block;
+  }
+
+  /* Add padding bottom to body so that the sticky bar doesn't overlap the content */
+  .app-container {
+    padding-bottom: 90px;
+  }
+}
+
+/* 극모바일 해상도(480px 이하)에서의 텍스트 및 간격 미세 조정 */
+@media (max-width: 480px) {
+
+  /* 극모바일 칩 초밀착 압축 (화면 밖 이탈 방지) */
+  .logo-img {
+    height: 34px;
+    /* 로고 이미지를 34px로 확대 */
+  }
+
+  .header-nav {
+    gap: 4px;
+  }
+
+  .nav-item {
+    padding: 4px 6px;
+    font-size: 0.68rem;
+    gap: 4px;
+  }
+
+  .nav-item .dot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+    /* 극모바일 최적화 */
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    /* 여백 단축 */
+  }
+
+  .hero-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+  }
+
+  .hero-graphic-wrap {
+    height: min(180px, 25vh);
+    /* 극모바일 뷰포트 높이 세이빙 */
+  }
+
+  .hero-lamp-img {
+    max-height: min(180px, 25vh);
+  }
+
+  .btn-hero-cta {
+    padding: 8px 18px;
+    font-size: 0.88rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  .btn-hero-cta {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+
+  .epic-main-title {
+    font-size: 1.5rem;
+  }
+
+  .btn-epic-action {
+    padding: 14px 28px;
+    font-size: 1.1rem;
+  }
+}
+
+/* BACKGROUND CONFETTI ANIMATION */
+.confetti-container {
+  position: fixed;
+  /* 전 섹션에서 흩날려 전체 축제 분위기를 보여줄 수 있도록 fixed로 복구 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  /* 격자 셀 및 섹션 배경(z-index: 1) 보다는 위, 실제 본문 텍스트/카드/버튼(z-index: 3) 보다는 아래에 배치 */
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  animation: confettiFall linear infinite;
+  will-change: transform;
+}
+
+/* 컨페티 형태 분기 */
+.confetti-piece.square {
+  border-radius: 2px;
+}
+
+.confetti-piece.circle {
+  border-radius: 50%;
+}
+
+.confetti-piece.triangle {
+  width: 0;
+  height: 0;
+  background-color: transparent !important;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid;
+}
+
+.confetti-piece.line {
+  background-color: transparent !important;
+  border-left: 2px solid;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(105vh) rotate(720deg) translateX(35px);
+  }
+}
+
+/* ==========================================================================
+   BACK TO TOP (스크롤 탑 버튼 - 키치 팝 스타일)
+   ========================================================================== */
+.btn-scroll-top {
+  position: fixed;
+  bottom: 100px;
+  right: 32px;
+  width: 52px;
+  height: 52px;
+  background-color: var(--bg-butter);
+  color: var(--primary-forest);
+  border: 3px solid var(--primary-forest);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 0px var(--primary-forest);
+  z-index: 999;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s var(--ease-jelly),
+    box-shadow 0.3s var(--ease-jelly),
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.btn-scroll-top.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+/* 통통 튀는 젤리 호버 및 액티브 액션 */
+.btn-scroll-top:hover {
+  transform: scale(1.1) translateY(-4px);
+  background-color: var(--accent-coral);
+  color: var(--pure-white);
+  box-shadow: 6px 6px 0px var(--primary-forest);
+}
+
+.btn-scroll-top:active {
+  transform: scale(0.95) translateY(2px);
+  box-shadow: 2px 2px 0px var(--primary-forest);
+}
+
+/* 768px 이하 모바일 디바이스 뷰포트 여백 최적화 */
+@media (max-width: 768px) {
+  .btn-scroll-top {
+    bottom: 96px;
+    /* 모바일 하단 고정 바 바로 위에 여유있게 배치 */
+    right: 20px;
+    width: 46px;
+    height: 46px;
+    box-shadow: 3px 3px 0px var(--primary-forest);
+  }
+
+  .btn-scroll-top:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 4px 4px 0px var(--primary-forest);
+  }
+
+  .btn-scroll-top:active {
+    transform: scale(0.96) translateY(1px);
+    box-shadow: 1.5px 1.5px 0px var(--primary-forest);
+  }
+}
+
+/* 3D 팝업북 히어로 및 개별 낱글자/스티커 데코 애니메이션 추가 */
+
+/* 글자 낱글자별 통통 튕기는 애니메이션 */
+.bounce-letter {
+  display: inline-block;
+  transition: transform 0.6s var(--ease-jelly), color 0.4s ease;
+  cursor: default;
+}
+
+.bounce-letter:hover {
+  animation: letterBounce 0.75s cubic-bezier(0.25, 1.35, 0.5, 1) forwards;
+  color: var(--primary-forest) !important;
+  text-shadow: 3px 3px 0px var(--accent-coral) !important;
+}
+
+@keyframes letterBounce {
+
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.15, 0.88) translateY(-10px);
+  }
+}
+
+/* 둥둥 뜨는 3D 스티커들 */
+.floating-sticker {
+  position: absolute;
+  z-index: 4;
+  font-size: 2rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.4) rotate(15deg);
+  transition: opacity 0.6s var(--ease-jelly), transform 0.6s var(--ease-jelly);
+}
+
+.floating-sticker.visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  animation: floatSticker 6s ease-in-out infinite;
+}
+
+.sticker-lightning-1 {
+  top: 16%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.sticker-star-1 {
+  top: 12%;
+  right: 12%;
+  font-size: 2.2rem;
+  animation-delay: 1.5s;
+}
+
+.sticker-heart-1 {
+  bottom: 14%;
+  left: 45%;
+  font-size: 1.8rem;
+  animation-delay: 3s;
+}
+
+.sticker-bulb-1 {
+  top: 45%;
+  right: 48%;
+  font-size: 1.8rem;
+  animation-delay: 0.8s;
+}
+
+/* 스티커 플로팅 키프레임 */
+@keyframes floatSticker {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(12deg) scale(1.08);
+  }
+}
+
+/* 다크 테마 구역 전체를 컨페티(z-index: 2) 위로 띄워 침범을 완전 차단하고, 내부 인터랙션 붕괴 복구 */
+.dark-theme-zone {
+  position: relative;
+  z-index: 3;
+}
+
+/* 
+  전 섹션의 콘텐츠 영역(글자, 카드, 버튼 등)을 컨페티(z-index: 2) 위로 돌출시키는 isolation 기법.
+  각 섹션의 콘텐츠 래퍼에 isolation: isolate를 적용하여 하위 레이아웃을 해치지 않고 
+  통째로 컨페티 위층으로 승격시켜, 컨페티가 모든 글자와 버튼 뒤편으로만 흐르게 보장합니다.
+*/
+.brand-header .header-logo,
+.brand-header .header-nav,
+.mobile-sticky-bar .sticky-bar-content,
+.grid-cell,
+.section-brand-story .container,
+.section-brand-story .brand-story-intro,
+.section-detail .container,
+.section-epic-cta .container {
+  position: relative;
+  isolation: isolate;
+  z-index: 3;
+}
+
+/* ==========================================================================
+   MOUSE CONFETTI TRAIL EFFECT (마우스 추적 선명한 컨페티 트레일 효과)
+   ========================================================================== */
+.mouse-confetti-piece {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  opacity: 1;
+  /* 투명도 100% 선명하게 노출 시작 */
+  animation: mouse-confetti-fade 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* 네모 컨페티 */
+.mouse-confetti-piece.shape-square {
+  border-radius: 0;
+}
+
+/* 동그라미 컨페티 */
+.mouse-confetti-piece.shape-circle {
+  border-radius: 50%;
+}
+
+/* 세모 컨페티 (보더 크기로 삼각형 빌드) */
+.mouse-confetti-piece.shape-triangle {
+  background-color: transparent !important;
+  border-left: solid transparent;
+  border-right: solid transparent;
+  border-bottom: solid;
+}
+
+@keyframes mouse-confetti-fade {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--tx), var(--ty), 0) scale(0.2) rotate(var(--rot));
+  }
+}
+
+/* 모바일 기기에서는 리소스 절약 및 터치 오동작 방지를 위해 비활성화 */
+@media (max-width: 768px) {
+  .mouse-confetti-piece {
+    display: none !important;
+  }
+}

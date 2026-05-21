@@ -1,0 +1,384 @@
+/* SECTION 4.5: UNBOXING & SPEC */
+.section-unboxing-spec {
+  padding: 100px 0;
+  background-color: transparent; /* 부모 다크 테마 배경 투과 */
+  border-bottom: 3px solid var(--primary-forest);
+}
+
+.spec-header {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.spec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-butter);
+  border: 2px solid var(--primary-forest);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--primary-forest);
+  margin-bottom: 16px;
+  box-shadow: 2px 2px 0px var(--primary-forest);
+}
+
+.gift-icon {
+  color: var(--accent-coral);
+}
+
+.spec-main-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  color: var(--primary-forest);
+  font-weight: 800;
+}
+
+.unboxing-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start; /* 상단 수평 밸런스를 맞추기 위해 start 정렬 */
+}
+
+/* 좌측: 비주얼 인터랙티브 존 */
+.unboxing-visual-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 72px; /* 우측 텍스트 영역 높이에 매칭시켜 박스 윗선을 평행하게 일치시킴 */
+}
+
+.package-interactive-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-butter);
+  border: 3px solid var(--primary-forest);
+  border-radius: 28px;
+  box-shadow: 6px 6px 0px var(--primary-forest);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  cursor: pointer;
+  overflow: visible; /* 스티커 튀어 나올 때 잘림 방지 */
+  transition: transform 0.3s var(--ease-jelly);
+}
+
+.package-box-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s var(--ease-jelly);
+}
+
+.package-main-img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border: 3px solid var(--primary-forest);
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px var(--primary-forest);
+  transition: transform 0.4s var(--ease-jelly);
+}
+
+/* 쫀득한 스티커 오버레이 데코레이션 */
+.sticker-overlay-item {
+  position: absolute;
+  background-color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--primary-forest);
+  box-shadow: 3px 3px 0px var(--primary-forest);
+  opacity: 0;
+  transform: scale(0.5) translate(0, 0);
+  pointer-events: none;
+  z-index: 10;
+  transition: 
+    transform 0.5s var(--ease-jelly),
+    opacity 0.4s ease;
+}
+
+/* 스티커 개별 포지션 및 팝 컬러 */
+.item-1 {
+  top: 15%;
+  left: 15%;
+  background-color: var(--accent-coral);
+  color: var(--pure-white);
+}
+
+.item-2 {
+  top: 10%;
+  right: 15%;
+  background-color: var(--primary-forest);
+  color: var(--bg-butter);
+  border-color: var(--primary-forest);
+}
+
+.item-3 {
+  bottom: 15%;
+  right: 10%;
+  background-color: #ffe675;
+}
+
+/* 호버 시 쫀득하고 탄력 있는 박스 들썩임 & 스티커 분출 */
+.package-interactive-card:hover {
+  transform: translateY(-4px);
+}
+
+.package-interactive-card:hover .package-box-wrapper {
+  transform: scale(1.05, 0.95) rotate(-2deg);
+}
+
+.package-interactive-card:hover .package-main-img {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.package-interactive-card:hover .item-1 {
+  opacity: 1;
+  transform: translate(-35px, -35px) rotate(-14deg) scale(1.1);
+}
+
+.package-interactive-card:hover .item-2 {
+  opacity: 1;
+  transform: translate(35px, -30px) rotate(12deg) scale(1.1);
+}
+
+.package-interactive-card:hover .item-3 {
+  opacity: 1;
+  transform: translate(25px, 25px) rotate(-8deg) scale(1.1);
+}
+
+.package-tagline {
+  margin-top: 28px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--primary-forest);
+  max-width: 440px;
+  text-align: center;
+}
+
+.bold-eco {
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* 우측 스펙 테이블 */
+.spec-table-zone {
+  text-align: left;
+}
+
+.spec-table-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary-forest);
+  margin-bottom: 8px;
+}
+
+.spec-table-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(11, 70, 40, 0.8);
+  margin-bottom: 24px;
+}
+
+.table-wrapper {
+  border: 3px solid var(--primary-forest);
+  border-radius: 20px;
+  box-shadow: 4px 4px 0px var(--primary-forest);
+  overflow: hidden;
+  background-color: var(--pure-white);
+  margin-bottom: 24px;
+}
+
+.spec-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.spec-detail-table th,
+.spec-detail-table td {
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  border-bottom: 2px dashed rgba(11, 70, 40, 0.12);
+}
+
+.spec-detail-table tr:last-child th,
+.spec-detail-table tr:last-child td {
+  border-bottom: none;
+}
+
+.spec-detail-table th {
+  background-color: #f7f9f6;
+  color: var(--primary-forest);
+  font-weight: 800;
+  width: 25%;
+  border-right: 2px dashed rgba(11, 70, 40, 0.12);
+  white-space: nowrap;
+}
+
+.spec-detail-table td {
+  color: rgba(11, 70, 40, 0.9);
+  font-weight: 600;
+}
+
+.spec-footer-alert {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #e2f4ea;
+  border: 2px solid var(--primary-forest);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-forest);
+}
+
+.alert-badge-icon {
+  color: var(--primary-forest);
+}
+
+/* 반응형 태블릿 & 모바일 가이드 */
+@media (max-width: 1024px) {
+  .unboxing-layout {
+    gap: 40px;
+  }
+  .spec-detail-table th {
+    width: 30%;
+  }
+}
+
+@media (max-width: 768px) {
+  .unboxing-layout {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+  .unboxing-visual-zone {
+    width: 100%;
+    margin-top: 0; /* 모바일 세로 1열 정렬 시에는 상단 여백 리셋 */
+  }
+  .package-interactive-card {
+    max-width: 340px;
+  }
+  .spec-table-zone {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .table-wrapper {
+    width: 100%;
+    max-width: 500px;
+  }
+  .spec-detail-table th {
+    padding: 12px 14px;
+    width: 35%;
+  }
+  .spec-detail-table td {
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .package-interactive-card {
+    max-width: 280px;
+    padding: 16px;
+  }
+  .sticker-overlay-item {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+  .package-tagline {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+}
+
+/* ==========================================================================
+   다크 테마 스크롤 대응 리디자인 (Theme Dark Adaptation)
+   ========================================================================== */
+.theme-dark .section-unboxing-spec {
+  background-color: transparent;
+}
+
+.theme-dark .spec-main-title {
+  color: var(--bg-butter);
+}
+
+.theme-dark .spec-badge {
+  background-color: #0b4628;
+  border-color: var(--bg-butter);
+  color: var(--bg-butter);
+  box-shadow: 2px 2px 0px var(--bg-butter);
+}
+
+.theme-dark .package-interactive-card {
+  border-color: var(--bg-butter);
+  box-shadow: 6px 6px 0px var(--bg-butter);
+}
+
+.theme-dark .sticker-overlay-item {
+  border-color: var(--bg-butter);
+  box-shadow: 3px 3px 0px var(--bg-butter);
+}
+
+.theme-dark .item-2 {
+  background-color: var(--bg-butter);
+  color: var(--primary-forest);
+  border-color: var(--bg-butter);
+}
+
+.theme-dark .package-tagline {
+  color: var(--pure-white);
+}
+
+.theme-dark .spec-table-title {
+  color: var(--bg-butter);
+}
+
+.theme-dark .spec-table-desc {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.theme-dark .table-wrapper {
+  border-color: var(--bg-butter);
+  box-shadow: 4px 4px 0px var(--bg-butter);
+  background-color: #0d4f2e; /* 다크 테마용 진한 에코그린 */
+}
+
+.theme-dark .spec-detail-table th {
+  background-color: #083820; /* 내부 헤더 구분 다크그린 */
+  color: var(--bg-butter);
+  border-right-color: rgba(255, 255, 255, 0.12);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.theme-dark .spec-detail-table td {
+  color: var(--pure-white);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.theme-dark .spec-footer-alert {
+  background-color: #0d4f2e;
+  border-color: var(--bg-butter);
+  color: var(--bg-butter);
+}
+
+.theme-dark .alert-badge-icon {
+  color: var(--bg-butter);
+}

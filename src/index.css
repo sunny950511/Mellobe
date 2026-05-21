@@ -1,0 +1,44 @@
+:root {
+  /* Color Tokens */
+  --bg-butter: #fff2ac;
+  --bg-butter-rgb: 255, 242, 172; /* RGB 값으로 추출하여 알파 채널 조작에 활용 */
+  --bg-card: #ffffff;
+  --primary-forest: #0b4628;
+  --accent-coral: #ff6b35;
+  --pure-white: #ffffff;
+
+  /* Typography Tokens */
+  --font-heading: 'Sofadi One', cursive;
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  /* Interaction Tokens (Jelly Popping 치트키) */
+  --ease-jelly: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --transition-jelly: transform 0.4s var(--ease-jelly), box-shadow 0.4s var(--ease-jelly);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-butter);
+  color: var(--primary-forest);
+  overflow-x: hidden;
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-butter);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-forest);
+  border: 2px solid var(--bg-butter);
+  border-radius: 10px;
+}

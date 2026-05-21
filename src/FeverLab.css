@@ -1,0 +1,644 @@
+/* SECTION 3: PRODUCT DETAIL (LAB) */
+.section-detail {
+  padding: 100px 0;
+  background-color: var(--pure-white);
+  /* 친환경 가치 섹션과 명확한 구분을 위해 화이트 선언 */
+  border-bottom: 3px solid var(--primary-forest);
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* 좌측: 실시간 반응형 조명 그래픽 캔버스 */
+.detail-canvas {
+  background-color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  border-radius: 28px;
+  height: 520px;
+  position: relative;
+  box-shadow: 6px 6px 0px 0px var(--primary-forest);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.canvas-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--primary-forest);
+  text-align: left;
+  font-weight: 800;
+}
+
+.lamp-visualizer-container {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 디밍 광배 효과 */
+.lamp-glow-effect {
+  position: absolute;
+  top: 45px;
+  /* 갓(Shade) 높이 근처로 고정 */
+  left: 50%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: normal;
+  /* 흰 배경에서도 잘 보이게 변경 */
+  transition:
+    transform 0.4s var(--ease-jelly),
+    opacity 0.4s ease,
+    background 0.4s ease;
+}
+
+.dim-level-1 {
+  background: radial-gradient(circle,
+      rgba(255, 230, 117, 0.45) 0%,
+      rgba(255, 242, 172, 0.15) 40%,
+      rgba(255, 255, 255, 0) 70%);
+}
+
+.dim-level-2 {
+  background: radial-gradient(circle,
+      rgba(255, 160, 80, 0.55) 0%,
+      rgba(255, 218, 120, 0.25) 45%,
+      rgba(255, 255, 255, 0) 70%);
+}
+
+.dim-level-3 {
+  background: radial-gradient(circle,
+      rgba(255, 107, 53, 0.65) 0%,
+      rgba(255, 180, 100, 0.35) 40%,
+      rgba(255, 255, 255, 0) 75%);
+}
+
+/* 대화형 조명 오브제 CSS 조립 */
+.interactive-lamp {
+  position: relative;
+  width: 200px;
+  /* 가로는 원래대로 200px 고정 */
+  height: 300px;
+  /* 세로 높이는 300px로 정교하게 축소 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  transform-origin: bottom center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 갓 (Shade) */
+.lamp-shade {
+  width: 140px;
+  height: 90px;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  border: 3px solid var(--primary-forest);
+  position: relative;
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease;
+}
+
+/* 갓 튕김 효과 (Jelly Bounce) */
+.jelly-bounce {
+  animation: shadeBounce 0.4s var(--ease-jelly) forwards;
+}
+
+@keyframes shadeBounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15, 0.85) translateY(-5px);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 패턴 디테일 */
+.green-checker {
+  background-color: #fffbdf;
+  background-image:
+    linear-gradient(45deg, var(--primary-forest) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--primary-forest) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--primary-forest) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--primary-forest) 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0px;
+}
+
+.coral-checker {
+  background-color: #fffbdf;
+  background-image:
+    linear-gradient(45deg, var(--accent-coral) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--accent-coral) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--accent-coral) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--accent-coral) 75%);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    0 12px,
+    12px -12px,
+    -12px 0px;
+}
+
+.butter-cream {
+  background-color: #ffe675;
+  background-image: radial-gradient(circle,
+      rgba(255, 255, 255, 0.4) 10%,
+      transparent 80%);
+}
+
+.shade-pattern-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none;
+}
+
+/* 기둥 (Stem) */
+.lamp-stem {
+  width: 10px;
+  height: 180px;
+  background-color: var(--primary-forest);
+  position: relative;
+  z-index: 1;
+}
+
+/* 스위치 체인 */
+.lamp-switch-point {
+  position: absolute;
+  top: 90px;
+  left: calc(50% + 5px);
+  /* 뼈대 너비 수축에 상관없이 언제나 기둥 바로 우측에 부착되도록 동적 좌표 계산 */
+  width: 4px;
+  height: 40px;
+  background-color: var(--primary-forest);
+  z-index: 1;
+}
+
+.lamp-switch-point::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-coral);
+  border-radius: 50%;
+  border: 2px solid var(--primary-forest);
+}
+
+/* 베이스 (Base) */
+.lamp-base {
+  width: 100px;
+  height: 20px;
+  background-color: var(--primary-forest);
+  border-radius: 10px 10px 0 0;
+  z-index: 2;
+  margin-top: -2px;
+  position: relative;
+}
+
+/* 쫀득하고 묵직한 3D 하부 그림자 */
+.lamp-base-shadow {
+  width: 110px;
+  height: 8px;
+  background-color: rgba(11, 70, 40, 0.15);
+  /* 딥그린 베이스의 부드러운 반투명 그림자 */
+  border-radius: 50%;
+  margin-top: 4px;
+  z-index: 1;
+  filter: blur(1.5px);
+  transition: transform 0.2s var(--ease-jelly);
+}
+
+.canvas-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-top: 2px dashed rgba(11, 70, 40, 0.2);
+  padding-top: 12px;
+  color: var(--primary-forest);
+}
+
+/* 우측: 컨트롤 탭 */
+.detail-control {
+  text-align: left;
+}
+
+.detail-title {
+  font-size: 2.4rem;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.detail-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: var(--primary-forest);
+  /* 배경 밝기에 관계없이 언제나 선명하게 초록색 고정 */
+  opacity: 0.95;
+}
+
+.control-group {
+  margin-bottom: 32px;
+}
+
+.control-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: var(--primary-forest);
+}
+
+/* 패턴 칩 그룹 */
+.pattern-chips {
+  display: flex;
+  gap: 12px;
+}
+
+.chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  padding: 10px 20px;
+  border-radius: 9999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-jelly);
+  box-shadow: 3px 3px 0px 0px var(--primary-forest);
+  white-space: nowrap;
+}
+
+.chip-btn.active {
+  background-color: var(--primary-forest);
+  color: var(--bg-butter);
+  box-shadow: none;
+  transform: translateY(3px);
+}
+
+.dot-preview {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-forest);
+  display: inline-block;
+}
+
+.dot-preview.green {
+  background-color: var(--primary-forest);
+}
+
+.dot-preview.coral {
+  background-color: var(--accent-coral);
+}
+
+.dot-preview.butter {
+  background-color: #ffe675;
+}
+
+.chip-btn.active .dot-preview {
+  border-color: var(--bg-butter);
+}
+
+/* 3단 디밍 슬라이더 스위치 */
+.dimming-switch-bg {
+  position: relative;
+  background-color: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  border-radius: 16px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  box-shadow: 4px 4px 0px 0px var(--primary-forest);
+  overflow: hidden;
+}
+
+.dimming-slider-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: calc(33.33% - 6px);
+  background-color: var(--accent-coral);
+  border: 3px solid var(--primary-forest);
+  border-radius: 12px;
+  transition: left 0.3s var(--ease-jelly);
+  z-index: 1;
+}
+
+.dim-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  height: 100%;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--primary-forest);
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.dim-btn.active {
+  color: var(--pure-white);
+}
+
+/* 각도 조절 슬라이더 */
+.angle-slider-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.angle-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 18px;
+  /* 세로 두께를 18px로 확장하여 그립감 향상 */
+  border-radius: 9999px;
+  background: var(--pure-white);
+  border: 3px solid var(--primary-forest);
+  outline: none;
+  box-shadow: 4px 4px 0px 0px var(--primary-forest);
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.1s var(--ease-jelly);
+}
+
+.angle-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  /* 조절 썸의 너비 24px -> 28px */
+  height: 28px;
+  /* 조절 썸의 높이 24px -> 28px */
+  border-radius: 50%;
+  background: var(--accent-coral);
+  border: 3px solid var(--primary-forest);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease-jelly);
+}
+
+.angle-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.angle-slider::-webkit-slider-thumb:active {
+  transform: scale(0.9);
+}
+
+/* 반응형 미디어 쿼리 - Fever Lab */
+@media (max-width: 1024px) {
+  .detail-layout {
+    gap: 40px;
+  }
+
+  .detail-canvas {
+    height: 480px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* 섹션 자체를 뷰포트에 꽉 차는 카드형 앱 뷰로 캡슐화 */
+  .section-detail {
+    height: 100vh;
+    height: 100dvh;
+    padding: 16px 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    /* 전체 페이지 스크롤 차단 */
+  }
+
+  .section-detail .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+
+  .detail-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 12px;
+    padding: 4px 8px 12px 4px;
+    /* 테두리와 두꺼운 입체 그림자가 잘리지 않도록 안전 여백 제공 */
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* 상단 48% 고정형 비주얼라이저 (공간 추가 확장) */
+  .detail-canvas {
+    flex: 0 0 48%;
+    height: 48%;
+    min-height: 230px;
+    margin: 0;
+    padding: 8px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 0px 0px var(--primary-forest);
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-butter);
+    /* 캔버스를 톤온톤 옐로우로 채워 시인성 강화 */
+  }
+
+  /* 모바일 화면 절약을 위한 캔버스 헤더/푸터 숨김 */
+  .detail-canvas .canvas-title,
+  .detail-canvas .canvas-footer {
+    display: none !important;
+  }
+
+  .lamp-visualizer-container {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .interactive-lamp {
+    transform: scale(0.82);
+    /* 스케일을 0.82로 대폭 확대하여 주변 여백을 최소한으로 압축 */
+    transform-origin: center center;
+  }
+
+  .lamp-glow-effect {
+    width: 150px;
+    height: 150px;
+    top: 30px;
+  }
+
+  /* 하단 48% 컨트롤 조작판 (박스 크기 추가 축소) */
+  .detail-control {
+    flex: 0 0 48%;
+    height: 48%;
+    overflow-y: auto;
+    background-color: var(--pure-white);
+    border: 3px solid var(--primary-forest);
+    border-radius: 20px;
+    padding: 16px 16px 10px 16px;
+    /* 하단 패딩만 자연스럽게 10px로 축소 */
+    box-shadow: 4px 4px 0px 0px var(--primary-forest);
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 마지막 조절 그룹의 불필요한 마진 제거 */
+  .detail-control .control-group:last-child {
+    margin-bottom: 0;
+  }
+
+  /* 모바일 스크롤 바 숨김 */
+  .detail-control::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-control {
+    scrollbar-width: none;
+  }
+
+  /* 컨트롤 타이틀 및 캡션 컴팩트화 */
+  .detail-title {
+    font-size: 1.35rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 4px;
+    line-height: 1.2;
+    color: var(--primary-forest);
+  }
+
+  .detail-desc {
+    text-align: center;
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+
+  .control-group {
+    margin-bottom: 16px;
+  }
+
+  .control-label {
+    justify-content: flex-start;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+
+  .control-label svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 패턴 칩 모바일 최적화 (가로 스크롤 슬라이딩 방식 이식) */
+  .pattern-chips {
+    justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pattern-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pattern-chips {
+    scrollbar-width: none;
+  }
+
+  .chip-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-width: 2px;
+    box-shadow: 2px 2px 0px 0px var(--primary-forest);
+  }
+
+  .chip-btn.active {
+    transform: translateY(2px);
+  }
+
+  /* 디밍 조절기 모바일 최적화 */
+  .dimming-switch-bg {
+    height: 42px;
+    border-width: 2px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0px 0px var(--primary-forest);
+  }
+
+  .dimming-slider-thumb {
+    border-width: 2px;
+    border-radius: 8px;
+  }
+
+  .dim-btn {
+    font-size: 0.82rem;
+  }
+
+  /* 각도 조절 슬라이더 모바일 최적화 */
+  .angle-slider-container {
+    padding: 4px 0;
+    max-width: 100%;
+  }
+
+  .angle-slider {
+    height: 14px;
+    border-width: 2px;
+    box-shadow: 3px 3px 0px 0px var(--primary-forest);
+  }
+
+  .angle-slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    border-width: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .interactive-lamp {
+    transform: scale(0.72);
+    /* 초소형 기기에서도 0.72로 여백 없이 꽉 채우도록 확대 */
+    transform-origin: center center;
+  }
+}
