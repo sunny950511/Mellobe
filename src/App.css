@@ -107,9 +107,9 @@ html {
 
 
 
-/* 클릭 움직임 인터렉션 강도 조절 ( scale(1.04) 정도로 살짝만 반응하여 덜 피로하게 ) */
+/* 클릭 움직임 인터렉션 강도 조절 (마우스 호버 시 위로 살짝 튀어오르는 액션 제공) */
 .nav-item:hover {
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-4px);
 }
 
 .nav-item:active {
@@ -1142,38 +1142,37 @@ html {
     flex-wrap: nowrap;
   }
 
-  /* 모바일 키치 칩 스타일 메뉴바 개편 */
+  /* 모바일 네비게이션: 박스 제거, 도트와 텍스트로만 구성 및 텍스트 축소 */
   .nav-item {
-    background-color: var(--bg-butter);
-    border: 2px solid var(--primary-forest);
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-size: 0.76rem;
-    font-weight: 900;
-    box-shadow: 2px 2px 0px 0px var(--primary-forest);
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 4px 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    box-shadow: none;
     color: var(--primary-forest);
     display: flex;
     align-items: center;
-    gap: 6px;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    gap: 4px;
+    transition: opacity 0.2s ease, transform 0.1s ease;
   }
 
-  /* 다크 존 테마일 때도 선명하도록 모바일 칩 보정 */
+  /* 다크 존 테마일 때도 흰색 배경 대신 투명하게 글자 색상 유지 */
   .theme-dark .nav-item {
-    background-color: var(--pure-white);
+    background-color: transparent;
     color: var(--primary-forest);
-    border-color: var(--primary-forest);
+    border: none;
   }
 
   /* 터치 영역이 넓고 흔들림 피로도가 낮은 모바일 클릭 모션 */
   .nav-item:hover {
     transform: none;
-    /* 모바일 호버 점핑 모션은 제거하여 눈 피로도 감소 */
   }
 
   .nav-item:active {
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0px 0px var(--primary-forest);
+    transform: translateY(1px);
+    opacity: 0.7;
   }
 
   .nav-item .dot {
@@ -1369,18 +1368,19 @@ html {
   }
 
   .header-nav {
-    gap: 4px;
+    gap: 3px;
   }
 
   .nav-item {
-    padding: 4px 6px;
-    font-size: 0.68rem;
-    gap: 4px;
+    padding: 2px 4px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    gap: 2px;
   }
 
   .nav-item .dot {
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
   }
 
   .hero-title {

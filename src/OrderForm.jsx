@@ -67,11 +67,7 @@ function OrderForm({ isOpen, onClose }) {
         {!isSubmitted ? (
           <form className="order-form-container" onSubmit={handleSubmit}>
             <div className="order-header">
-              <span className="order-badge">
-                <Sparkles size={14} /> ORDER FORM
-              </span>
               <h2 className="order-title">주문하기</h2>
-              <p className="order-subtitle">지구를 생각하는 마음으로 꼼꼼하게 채워주세요.</p>
             </div>
 
             <div className="order-body">
@@ -117,17 +113,7 @@ function OrderForm({ isOpen, onClose }) {
                 </div>
               </div>
 
-              {/* Quantity Picker */}
-              <div className="form-group">
-                <label className="form-label">수량</label>
-                <div className="quantity-controller">
-                  <button type="button" onClick={() => handleQuantity(-1)} className="qty-btn">-</button>
-                  <span className="qty-val">{formData.quantity}</span>
-                  <button type="button" onClick={() => handleQuantity(1)} className="qty-btn">+</button>
-                </div>
-              </div>
-
-              {/* Text Fields */}
+              {/* 성함 */}
               <div className="form-group">
                 <label className="form-label" htmlFor="order-name">성함</label>
                 <input
@@ -136,12 +122,13 @@ function OrderForm({ isOpen, onClose }) {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="성함을 입력해주세요"
+                  placeholder="성함 입력"
                   className="form-input"
                   required
                 />
               </div>
 
+              {/* 연락처 */}
               <div className="form-group">
                 <label className="form-label" htmlFor="order-phone">연락처</label>
                 <input
@@ -156,18 +143,29 @@ function OrderForm({ isOpen, onClose }) {
                 />
               </div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="order-address">배송지</label>
-                <textarea
+              {/* 배송지 주소 */}
+              <div className="form-group address-group">
+                <label className="form-label" htmlFor="order-address">배송지 주소</label>
+                <input
+                  type="text"
                   id="order-address"
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  placeholder="체커보드를 품을 소중한 공간의 주소를 입력해주세요."
-                  className="form-textarea"
-                  rows="3"
+                  placeholder="배송 주소를 입력해주세요."
+                  className="form-input"
                   required
                 />
+              </div>
+
+              {/* 수량 */}
+              <div className="form-group qty-group">
+                <label className="form-label">수량</label>
+                <div className="quantity-controller">
+                  <button type="button" onClick={() => handleQuantity(-1)} className="qty-btn">-</button>
+                  <span className="qty-val">{formData.quantity}</span>
+                  <button type="button" onClick={() => handleQuantity(1)} className="qty-btn">+</button>
+                </div>
               </div>
 
               {/* Eco pledge check */}
