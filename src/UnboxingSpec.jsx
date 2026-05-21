@@ -66,7 +66,7 @@ function UnboxingSpec() {
 
           {/* 좌측 하단 설명글 */}
           <div className="package-tagline">
-            <span className="bold-eco">100% 생분해 사탕수수 재생 크라프트지</span>로 제작된 친환경 시그니처 박스와, 스탠드 몸체나 다이어리에 커스텀 튜닝할 수 있는 <strong>젤리 팝 스티커 팩</strong>이 함께 동봉됩니다.
+            <span className="bold-eco">100% 생분해 사탕수수 재생 크라프트지</span>로 제작된 시그니처 박스와, 스탠드 몸체나 다이어리에 커스텀 할 수 있는 <strong>젤리 팝 스티커 팩</strong>이 함께 동봉됩니다.
           </div>
 
           {/* 우측 하단 무상보증 배지 */}
