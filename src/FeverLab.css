@@ -437,90 +437,83 @@
 
 @media (max-width: 768px) {
 
-  /* 섹션 자체를 뷰포트에 꽉 차는 카드형 앱 뷰로 캡슐화 */
+  /* 섹션 자체를 뷰포트에 꽉 차는 카드형 앱 뷰로 캡슐화했던 높이 고정을 해제하고 자연스러운 스크롤 유도 */
   .section-detail {
-    height: 100vh;
-    height: 100dvh;
-    padding: 16px 0;
+    height: auto;
+    min-height: auto;
+    padding: 60px 0;
     box-sizing: border-box;
-    overflow: hidden;
-    /* 전체 페이지 스크롤 차단 */
+    overflow: visible;
   }
 
   .section-detail .container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0 12px;
+    height: auto;
+    display: block;
+    padding: 0 20px;
     box-sizing: border-box;
   }
 
   .detail-layout {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    gap: 12px;
-    padding: 4px 8px 12px 4px;
-    /* 테두리와 두꺼운 입체 그림자가 잘리지 않도록 안전 여백 제공 */
+    height: auto;
+    gap: 24px;
+    padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
   }
 
-  /* 상단 48% 고정형 비주얼라이저 (공간 추가 확장) */
+  /* 상단 비주얼라이저 - 높이를 고정이 아닌 정당한 값으로 변경 */
   .detail-canvas {
-    flex: 0 0 48%;
-    height: 48%;
-    min-height: 230px;
+    flex: none;
+    height: 380px;
+    min-height: auto;
     margin: 0;
-    padding: 8px;
-    border-radius: 20px;
-    box-shadow: 4px 4px 0px 0px var(--primary-forest);
-    justify-content: center;
-    align-items: center;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 6px 6px 0px 0px var(--primary-forest);
+    justify-content: space-between; /* 기존 flex-direction 컬럼 구성을 활용하기 위해 복원 */
+    align-items: stretch;
     background-color: var(--bg-butter);
-    /* 캔버스를 톤온톤 옐로우로 채워 시인성 강화 */
   }
 
-  /* 모바일 화면 절약을 위한 캔버스 헤더/푸터 숨김 */
+  /* 모바일에서도 랩 이름 및 하단 대화창이 정상적으로 표시되도록 복원 */
   .detail-canvas .canvas-title,
   .detail-canvas .canvas-footer {
-    display: none !important;
+    display: flex !important;
   }
 
   .lamp-visualizer-container {
     width: 100%;
-    height: 100%;
-    margin-bottom: 0;
+    height: 250px; /* 스탠드 높이 최적화 */
+    margin-bottom: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .interactive-lamp {
-    transform: scale(0.82);
-    /* 스케일을 0.82로 대폭 확대하여 주변 여백을 최소한으로 압축 */
+    transform: scale(0.75);
     transform-origin: center center;
   }
 
   .lamp-glow-effect {
-    width: 150px;
-    height: 150px;
+    width: 140px;
+    height: 140px;
     top: 30px;
   }
 
-  /* 하단 48% 컨트롤 조작판 (박스 크기 추가 축소) */
+  /* 하단 컨트롤 조작판 (높이 고정 해제하여 내용이 잘리지 않도록 변경) */
   .detail-control {
-    flex: 0 0 48%;
-    height: 48%;
-    overflow-y: auto;
+    flex: none;
+    height: auto;
+    overflow-y: visible;
     background-color: var(--pure-white);
     border: 3px solid var(--primary-forest);
-    border-radius: 20px;
-    padding: 16px 16px 10px 16px;
-    /* 하단 패딩만 자연스럽게 10px로 축소 */
-    box-shadow: 4px 4px 0px 0px var(--primary-forest);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 6px 6px 0px 0px var(--primary-forest);
     box-sizing: border-box;
-    -webkit-overflow-scrolling: touch;
   }
 
   /* 마지막 조절 그룹의 불필요한 마진 제거 */
