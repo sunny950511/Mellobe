@@ -8,7 +8,7 @@
 * **개발 인원:** 개인 프로젝트 (기여도 100%)
 
 ## 2. 배포 및 관련 링크
-* **Live Demo:** https://sunny950511-ux.github.io/Mellobe/
+* **Live Demo:** https://sunny950511.github.io/Mellobe/
 * **GitHub Repository:** https://github.com/sunny950511-ux/Mellobe
 
 ---
